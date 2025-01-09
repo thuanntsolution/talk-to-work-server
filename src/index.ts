@@ -3,6 +3,7 @@ import 'dotenv/config'
 
 import { config } from './config/app.config'
 import connectDatabase from './databases/database'
+import { errorHandler } from './middlewares/errorHandler'
 
 const app = express()
 
@@ -30,6 +31,8 @@ app.get('/', (req: Request, res: Response) => {
     </html>
   `)
 })
+
+app.use(errorHandler)
 
 app.listen(config.PORT, async () => {
   console.log(`Server is listening on port ${config.PORT} in ${config.NODE_ENV}`)
